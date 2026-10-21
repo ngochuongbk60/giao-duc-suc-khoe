@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kho Truyền Thông – Giáo Dục Sức Khỏe</title>
+  <meta name="description"
+    content="Thư viện video giáo dục sức khỏe cho người bệnh – hướng dẫn chăm sóc, dinh dưỡng và vận động theo từng bệnh lý." />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #0ea5e9;
+      --primary-dark: #0284c7;
+      --accent: #0284c7;
+      --bg: #f8fafc;
+      --bg2: #f1f5f9;
+      --card: #ffffff;
+      --card-hover: #f0f9ff;
+      --border: rgba(14, 165, 233, 0.2);
+      --text: #0f172a;
+      --muted: #64748b;
+      --badge: #e2e8f0;
+      --gold: #f59e0b;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 60%, #7dd3fc 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 24px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(255, 255, 255, .4) 0%, transparent 70%);
+    }
+
+    .header-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .logo-icon {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg, var(--primary), #2563eb);
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 32px rgba(14, 165, 233, .4);
+    }
+
+    header h1 {
+      font-size: clamp(1.7rem, 4vw, 2.8rem);
+      font-weight: 800;
+      background: linear-gradient(90deg, #0f172a 30%, #0369a1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 620px;
+      margin: 0 auto 28px;
+    }
+
+    .stat-row {
+      display: inline-flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: rgba(14, 165, 233, .08);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 28px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .stat span {
+      font-size: .8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    /* ── SEARCH ── */
+    .search-wrap {
+      max-width: 640px;
+      margin: 36px auto 0;
+      padding: 0 16px;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .3);
+      transition: border-color .2s;
+    }
+
+    .search-box:focus-within {
+      border-color: var(--primary);
+    }
+
+    .search-box span {
+      padding: 0 14px;
+      font-size: 1.2rem;
+      color: var(--muted);
+    }
+
+    .search-box input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 14px 0;
+    }
+
+    .search-box input::placeholder {
+      color: var(--muted);
+    }
+
+    /* ── FILTER TABS ── */
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 28px 16px 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .filter-btn {
+      padding: 7px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted);
+      font-family: inherit;
+      font-size: .85rem;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    /* ── GRID ── */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+    }
+
+    #count-label {
+      color: var(--muted);
+      font-size: .9rem;
+      margin-bottom: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px 22px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: transform .25s, box-shadow .25s, border-color .25s, background .25s;
+      cursor: default;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(14, 165, 233, .18);
+      border-color: var(--primary);
+      background: var(--card-hover);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .card-num {
+      min-width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: .95rem;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(14, 165, 233, .3);
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.4;
+      padding-top: 2px;
+    }
+
+    .card-category {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .cat-noi {
+      background: rgba(14, 165, 233, .15);
+      color: var(--primary);
+    }
+
+    .cat-ngoai {
+      background: rgba(168, 85, 247, .15);
+      color: #c084fc;
+    }
+
+    .cat-than {
+      background: rgba(16, 185, 129, .15);
+      color: #34d399;
+    }
+
+    .cat-pt {
+      background: rgba(245, 158, 11, .15);
+      color: #fbbf24;
+    }
+
+    .cat-nhi {
+      background: rgba(239, 68, 68, .15);
+      color: #f87171;
+    }
+
+    .cat-other {
+      background: rgba(99, 102, 241, .15);
+      color: #a5b4fc;
+    }
+
+    .card-videos {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .video-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: rgba(14, 165, 233, .07);
+      border: 1px solid rgba(14, 165, 233, .12);
+      border-radius: 10px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: .88rem;
+      font-weight: 500;
+      transition: background .2s, border-color .2s;
+    }
+
+    .video-link:hover {
+      background: rgba(14, 165, 233, .18);
+      border-color: var(--primary);
+      color: var(--primary-dark);
+    }
+
+    .video-link .play-icon {
+      width: 26px;
+      height: 26px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--primary), #2563eb);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .65rem;
+    }
+
+    .video-link .link-text {
+      flex: 1;
+      line-height: 1.35;
+    }
+
+    .no-video-note {
+      font-size: .83rem;
+      color: var(--muted);
+      font-style: italic;
+      padding: 8px 12px;
+      border: 1px dashed rgba(126, 168, 204, .25);
+      border-radius: 8px;
+    }
+
+    /* hidden */
+    .card.hidden {
+      display: none;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 28px 16px;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-row {
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo-icon">🏥</div>
+      <h1>Kho Truyền Thông<br />Giáo Dục Sức Khỏe</h1>
+      <p>Thư viện video hướng dẫn chăm sóc sức khỏe dành cho người bệnh và gia đình – chế độ dinh dưỡng, vận động và
+        phòng ngừa bệnh tật.</p>
+      <div class="stat-row">
+        <div class="stat"><strong>58</strong><span>Chủ đề</span></div>
+        <div class="stat"><strong>58+</strong><span>Video</span></div>
+        <div class="stat"><strong>Free</strong><span>Miễn phí</span></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="search-wrap">
+    <div class="search-box">
+      <span>🔍</span>
+      <input type="text" id="searchInput" placeholder="Tìm kiếm bệnh lý, chủ đề..." oninput="filterCards()" />
+    </div>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="setFilter('all', this)">Tất cả</button>
+    <button class="filter-btn" onclick="setFilter('noi', this)">Nội khoa</button>
+    <button class="filter-btn" onclick="setFilter('ngoai', this)">Ngoại khoa</button>
+    <button class="filter-btn" onclick="setFilter('than', this)">Thận – Tiết niệu</button>
+    <button class="filter-btn" onclick="setFilter('nhi', this)">Nhi khoa</button>
+    <button class="filter-btn" onclick="setFilter('pt', this)">Phục hồi CN</button>
+    <button class="filter-btn" onclick="setFilter('other', this)">Khác</button>
+  </div>
+
+  <main>
+    <p id="count-label">Hiển thị <strong id="countNum">58</strong> chủ đề</p>
+    <div class="grid" id="cardGrid">
+
+      <!-- 1 -->
+      <div class="card" data-cat="noi" data-title="đái tháo đường type 2">
+        <div class="card-top">
+          <div class="card-num">1</div>
+          <a href="https://drive.google.com/file/d/1tqOquxV_o7RUXkH7V8zn26EgAez4cnyF/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Đái tháo đường type 2</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1JpJaN63Gplp-k4CG-zSDY8-sekTFCliT/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về chế độ dinh
+              dưỡng, vận động bệnh đái tháo đường tuýp II</span></a>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="card" data-cat="noi" data-title="rối loạn chuyển hóa lipid máu">
+        <div class="card-top">
+          <div class="card-num">2</div>
+          <a href="https://drive.google.com/file/d/1zmfJTTL65HdCTm5YGEH7O4GA5kXzvSwV/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Rối loạn chuyển hóa lipid máu</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1LRfBT0VBHB63Uzcz-XwMc9q3BNJ9GM5A/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về chế độ dinh
+              dưỡng, vận động bệnh mỡ máu</span></a>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="card" data-cat="noi" data-title="tăng huyết áp">
+        <div class="card-top">
+          <div class="card-num">3</div>
+          <a href="https://drive.google.com/file/d/1oSdm9-f6PQKp5TWIgZ4Lo1MXgT2hpD4b/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Tăng huyết áp</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/14N1d-ItNmAuwui82jc3Xq1-xxPpXd47M/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Tăng
+              huyết áp</span></a>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="card" data-cat="noi" data-title="giáo dục sức khoẻ cho người bệnh suy tim">
+        <div class="card-top">
+          <div class="card-num">4</div>
+          <a href="https://drive.google.com/file/d/1vFFNlsOo0USAgnBxnvQK22jzirMo9E_H/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Giáo dục sức khoẻ cho người bệnh Suy tim</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1uwi9A2zKXtRlctQqjXBmNdkE5uwCeJlF/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Suy
+              tim</span></a>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="card" data-cat="noi" data-title="chăm sóc người bệnh viêm khớp dạng thấp">
+        <div class="card-top">
+          <div class="card-num">5</div>
+          <a href="https://drive.google.com/file/d/1PL2MWXnBdcNE77maopVXvR-BJhMSCYM_/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Chăm sóc người bệnh Viêm khớp dạng thấp</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1egItcrYh92A8poLF8qbkhkRsS1FKOrUk/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Viêm khớp
+              dạng thấp</span></a>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="card" data-cat="noi" data-title="chăm sóc người bệnh loãng xương">
+        <div class="card-top">
+          <div class="card-num">6</div>
+          <a href="https://drive.google.com/file/d/1sXyd9zxszHWOBNHq35VN5lhcKqRXvp5B/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Chăm sóc người bệnh loãng xương</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1Hcp5KT6YgaRcVufGAoanu7r3TZE-Q3Vd/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Loãng
+              xương</span></a>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="card" data-cat="noi" data-title="truyền thông – gdsk người bệnh xơ gan">
+        <div class="card-top">
+          <div class="card-num">7</div>
+          <a href="https://drive.google.com/file/d/1Drxd0c7XFi37a0i1S4Tc_YQZz1Lr1kJG/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Truyền thông – GDSK người bệnh Xơ gan</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1DvuGg_ngZXL5anBbv7p4GVBEKHfRW9sh/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Xơ
+              gan</span></a>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="card" data-cat="noi" data-title="truyền thông – gdsk người bệnh viêm tuỵ cấp">
+        <div class="card-top">
+          <div class="card-num">8</div>
+          <a href="https://drive.google.com/file/d/1nNX90UH2_8ZJwu3TWi4HvtryuGzy6gUU/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Truyền thông – GDSK người bệnh viêm tuỵ cấp</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/12pkNqUFLrRdfPrq3UaU7tfWI20T1Zqoh/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Viêm tuỵ
+              cấp</span></a>
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="card" data-cat="noi" data-title="chăm sóc người bệnh đột quỵ não">
+        <div class="card-top">
+          <div class="card-num">9</div>
+          <a href="https://drive.google.com/file/d/1RgH-jGJi5yBQTguZsQCNt7RfmVawEwVf/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Chăm sóc người bệnh Đột quỵ não</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1oncCkI32B8EkiGj8IEEiJeYcBlHP0464/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Đột quỵ
+              não</span></a>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="card" data-cat="noi" data-title="chăm sóc người bệnh mắc bệnh gout">
+        <div class="card-top">
+          <div class="card-num">10</div>
+          <a href="https://drive.google.com/file/d/1MDzw5J5BF4rcPTfRaSmSy4Fys5LF4Y0E/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Chăm sóc người bệnh mắc bệnh GOUT</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1tU_WhEoBtPM7p0AmpwqrzflgEmd7Q3cr/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh
+              GOUT</span></a>
+        </div>
+      </div>
+
+      <!-- 11 -->
+      <div class="card" data-cat="than" data-title="bệnh thận giai đoạn 5">
+        <div class="card-top">
+          <div class="card-num">11</div>
+          <a href="https://drive.google.com/file/d/17sNOqro3yypa9b4kE1_letywLBGB9JVH/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Bệnh Thận giai đoạn 5</a>
+        </div>
+        <span class="card-category cat-than">Thận – Tiết niệu</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1KEKTjrQYvF6gKgi3ZgeDVnw-AJzhFYs2/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Thận giai
+              đoạn 5</span></a>
+        </div>
+      </div>
+
+      <!-- 12 -->
+      <div class="card" data-cat="than" data-title="suy thận cấp">
+        <div class="card-top">
+          <div class="card-num">12</div>
+          <a href="https://drive.google.com/file/d/1TdpzWiz9pqofPCtl7fBT0sIKJrQVqxam/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Suy thận cấp</a>
+        </div>
+        <span class="card-category cat-than">Thận – Tiết niệu</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1iP5ox3VREXDAr4rhkgaflKD3ARVMIFFQ/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Suy thận
+              cấp</span></a>
+        </div>
+      </div>
+
+      <!-- 13 -->
+      <div class="card" data-cat="noi" data-title="bệnh thủy đậu">
+        <div class="card-top">
+          <div class="card-num">13</div>
+          <a href="https://drive.google.com/file/d/1P-U0TjybzuRcaZC2zOmAziT4E88v9VWp/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Bệnh thủy đậu</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1Fxo1gBfxYGfskM4WgGct7efDD_7fvYoZ/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Thuỷ
+              đậu</span></a>
+        </div>
+      </div>
+
+      <!-- 14 -->
+      <div class="card" data-cat="noi" data-title="bệnh viêm gan">
+        <div class="card-top">
+          <div class="card-num">14</div>
+          <a href="https://drive.google.com/file/d/17EALFa7EXITFsFuKeQcEGLOYXDqpvyiC/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Bệnh viêm gan</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1_L7G1jCfRwEk0afCZBnJCOBshIsUnaki/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Viêm
+              gan</span></a>
+        </div>
+      </div>
+
+      <!-- 15 -->
+      <div class="card" data-cat="noi" data-title="bệnh hen phế quản">
+        <div class="card-top">
+          <div class="card-num">15</div>
+          <a href="https://drive.google.com/file/d/19j3VM9X_rfU29wHmUVyHNy-uSxyu5PqF/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Bệnh Hen phế quản</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/19j3VM9X_rfU29wHmUVyHNy-uSxyu5PqF/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Hen phế
+              quản</span></a>
+        </div>
+      </div>
+
+      <!-- 16 -->
+      <div class="card" data-cat="noi" data-title="bệnh viêm phổi cộng đồng">
+        <div class="card-top">
+          <div class="card-num">16</div>
+          <a href="https://drive.google.com/file/d/1pI175tQNRiwo7OWY-jsewYybn1rx27d2/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Bệnh Viêm phổi cộng đồng</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1ISnpGqR78PJcgHW79F_vr6FebBoRVFDZ/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Viêm phổi
+              cộng đồng</span></a>
+        </div>
+      </div>
+
+      <!-- 17 -->
+      <div class="card" data-cat="noi" data-title="bệnh viêm loét dạ dày – tá tràng">
+        <div class="card-top">
+          <div class="card-num">17</div>
+          <a href="https://drive.google.com/file/d/10AAj6Xrqaza4GSeeeZGM2jBcPTw3ch5A/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Bệnh Viêm loét dạ dày – tá tràng</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1tDgW5uistEJM1UrkLMitWFYCnTDfD5oo/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Viêm loét
+              dạ dày – tá tràng</span></a>
+        </div>
+      </div>
+
+      <!-- 18 -->
+      <div class="card" data-cat="noi" data-title="quy trình nội soi đại tràng">
+        <div class="card-top">
+          <div class="card-num">18</div>
+          <a href="https://drive.google.com/file/d/1KwX-iO4mdBU03UgQEBy_JTGMmOgfZN-R/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Quy trình nội soi đại tràng</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1VkbnJ4bkVG350zywoL1SFAaMPIS9Q1Bx/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Hướng dẫn dùng thuốc nội soi Đại
+              tràng</span></a>\n <a href="https://drive.google.com/file/d/1OK92CymJATw8apgoq9v2-l0N9aiIukKz/view"
+            target="_blank" class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn
+              dùng thuốc nội soi đại tràng</span></a>
+        </div>
+      </div>
+
+      <!-- 19 -->
+      <div class="card" data-cat="noi" data-title="truyền thông – gdsk người bệnh ung thư phổi">
+        <div class="card-top">
+          <div class="card-num">19</div>
+          <a href="https://drive.google.com/file/d/14aVQNpV_1wC58ms_qgjvfzaQsfkin0NI/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Truyền thông – GDSK người bệnh Ung thư phổi</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/12mGCB3F3qKR_FOx5tQcIgjQ2F1D4SJmO/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Ung thư
+              phổi</span></a>
+        </div>
+      </div>
+
+      <!-- 20 -->
+      <div class="card" data-cat="noi" data-title="tư vấn giáo dục sức khỏe bệnh phù phổi cấp">
+        <div class="card-top">
+          <div class="card-num">20</div>
+          <a href="https://drive.google.com/file/d/19IdcAuBIZMtjbTGLvAS7jmUC2HwtZvg8/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Tư vấn giáo dục sức khỏe bệnh Phù phổi cấp</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1u9l2aZCPfAHa-ngvrbuymOql6rb-IakL/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Phù phổi
+              cấp</span></a>
+        </div>
+      </div>
+
+      <!-- 21 -->
+      <div class="card" data-cat="noi" data-title="tư vấn giáo dục sức khỏe bệnh suy hô hấp">
+        <div class="card-top">
+          <div class="card-num">21</div>
+          <a href="https://drive.google.com/file/d/1fLESWWYCAO3Bhr1DQFxLytIoogbG-WQJ/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Tư vấn giáo dục sức khỏe bệnh Suy hô hấp</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/16QcNT0QaeJd53QnjTZX7D1Cwc-M8RmWg/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Suy hô
+              hấp</span></a>
+        </div>
+      </div>
+
+      <!-- 22 -->
+      <div class="card" data-cat="noi" data-title="giáo dục sức khoẻ nhồi máu cơ tim">
+        <div class="card-top">
+          <div class="card-num">22</div>
+          <a href="https://drive.google.com/file/d/1zVY4jIpq-224ja9WOCq-QoxzK5xVItlQ/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Giáo dục sức khoẻ Nhồi máu cơ tim</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1pktoMr6yal3Mo7K2uxdItkwwE2nVfS1Q/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Nhồi máu
+              cơ tim</span></a>
+        </div>
+      </div>
+
+      <!-- 23 -->
+      <div class="card" data-cat="noi" data-title="giáo dục sức khoẻ tai biến mạch máu não">
+        <div class="card-top">
+          <div class="card-num">23</div>
+          <a href="https://drive.google.com/file/d/1OmdGP7o2cEneOQGCnvG3u2lMz73DCR0J/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Giáo dục sức khoẻ Tai biến mạch máu não</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1pa23mbaOHz3pPVRu6H8d3dpDoRqOaZHm/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Tai biến
+              mạch máu não</span></a>
+        </div>
+      </div>
+
+      <!-- 24 -->
+      <div class="card" data-cat="nhi" data-title="chăm sóc trẻ bị tiêu chảy cấp">
+        <div class="card-top">
+          <div class="card-num">24</div>
+          <a href="https://drive.google.com/file/d/1KuiPkVa2zHvO07y37ygFA_04H-U5nGoi/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Chăm sóc trẻ bị Tiêu chảy cấp</a>
+        </div>
+        <span class="card-category cat-nhi">Nhi khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1eCo6mfWeXNKqD8ex1EpBFMrPPp34ghy_/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về bệnh Tiêu chảy
+              cấp</span></a>
+        </div>
+      </div>
+
+      <!-- 25 -->
+      <div class="card" data-cat="nhi" data-title="chăm sóc trẻ bị sốt cao co giật">
+        <div class="card-top">
+          <div class="card-num">25</div>
+          <a href="https://drive.google.com/file/d/1rc68IQ4S1g_2numwdaIKRhbakLiyFRkA/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Chăm sóc trẻ bị Sốt cao co giật</a>
+        </div>
+        <span class="card-category cat-nhi">Nhi khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1Vo3JmiFJJc5LLaATRgBjhpjPRBH6ixlG/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về Trẻ bị Sốt cao
+              co giật</span></a>
+        </div>
+      </div>
+
+      <!-- 26 -->
+      <div class="card" data-cat="other" data-title="chăm sóc và dự phòng loét do tỳ đè">
+        <div class="card-top">
+          <div class="card-num">26</div>
+          <a href="https://drive.google.com/file/d/16QzrNfPtuUkwQ8coX1mLUQfrot1gtXAd/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Chăm sóc và dự phòng loét do tỳ đè</a>
+        </div>
+        <span class="card-category cat-other">Điều dưỡng</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1NhP7asbKLsa29NNswcTqpD-CLApPIc_A/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về chăm sóc loét
+              tỳ đè</span></a>
+        </div>
+      </div>
+
+      <!-- 27 -->
+      <div class="card" data-cat="ngoai" data-title="bệnh tràn máu màng phổi do chấn thương">
+        <div class="card-top">
+          <div class="card-num">27</div>
+          <a href="https://drive.google.com/file/d/1VW3a7sVRpf9BykLi6y2JZMZYmHa6gm83/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Bệnh tràn máu màng phổi do chấn thương</a>
+        </div>
+        <span class="card-category cat-ngoai">Ngoại khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1eCXSPDfgvZA_uvXc2C5K0Kt4rBFhM602/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về dinh dưỡng,
+              chăm sóc, vận động</span></a>
+        </div>
+      </div>
+
+      <!-- 28 -->
+      <div class="card" data-cat="ngoai" data-title="phòng ngừa tắc động mạch chi dưới">
+        <div class="card-top">
+          <div class="card-num">28</div>
+          <a href="https://drive.google.com/file/d/1AvscDOkEIUMBFOvu86twmuej2f6z8DFS/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Phòng ngừa tắc động mạch chi dưới</a>
+        </div>
+        <span class="card-category cat-ngoai">Ngoại khoa</span>
+        <div class="card-videos">
+          <p class="no-video-note">Đang cập nhật video hướng dẫn…</p>
+        </div>
+      </div>
+
+      <!-- 29 -->
+      <div class="card" data-cat="ngoai" data-title="bệnh chấn thương sọ não">
+        <div class="card-top">
+          <div class="card-num">29</div>
+          <a href="https://drive.google.com/file/d/1IvQnZDp7EkaPw8x6Lax0gFnOa_jxMXdV/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Bệnh chấn thương sọ não</a>
+        </div>
+        <span class="card-category cat-ngoai">Ngoại khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1Fe2FDpI3M3oEhd3t4qOx9Cyt_fZ-Xe2v/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về dinh dưỡng,
+              chăm sóc, vận động</span></a>
+        </div>
+      </div>
+
+      <!-- 30 -->
+      <div class="card" data-cat="ngoai" data-title="sau phẫu thuật u não">
+        <div class="card-top">
+          <div class="card-num">30</div>
+          <a href="https://drive.google.com/file/d/1gOmefIlGQHcLyuoKdEcpBsUZEEl8hChE/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Sau phẫu thuật u não</a>
+        </div>
+        <span class="card-category cat-ngoai">Ngoại khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1DcvObPc9aAQi4oNWPJ5swmoyr4bu2qHI/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về dinh dưỡng,
+              chăm sóc, vận động</span></a>
+        </div>
+      </div>
+
+      <!-- 31 -->
+      <div class="card" data-cat="ngoai" data-title="giáo dục sức khoẻ bệnh gãy xương đùi">
+        <div class="card-top">
+          <div class="card-num">31</div>
+          <a href="https://drive.google.com/file/d/1bj6ao-PYVkoSARqn24AVr3EdS9vGzl5Z/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Giáo dục sức khoẻ bệnh gãy xương đùi</a>
+        </div>
+        <span class="card-category cat-ngoai">Ngoại khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1Hh9ymij_It8ZiciggfHMKjCcM7VmvOOC/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về dinh dưỡng,
+              chăm sóc, vận động</span></a>
+        </div>
+      </div>
+
+      <!-- 32 -->
+      <div class="card" data-cat="ngoai" data-title="giáo dục sức khoẻ bệnh gãy xương bánh chè">
+        <div class="card-top">
+          <div class="card-num">32</div>
+          <a href="https://drive.google.com/file/d/1J67PjccmHE9AU20nZWy8kKAHhYNJ1WA9/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Giáo dục sức khoẻ bệnh gãy xương bánh chè</a>
+        </div>
+        <span class="card-category cat-ngoai">Ngoại khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1wHD6cNWeCvqp9C8cg3wAFZ7FCFGkrbV9/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về dinh dưỡng,
+              chăm sóc, vận động</span></a>
+        </div>
+      </div>
+
+      <!-- 33 -->
+      <div class="card" data-cat="ngoai" data-title="bệnh thoái hóa khớp háng">
+        <div class="card-top">
+          <div class="card-num">33</div>
+          <a href="https://drive.google.com/file/d/1Fdry9NkrxxQ-pS6HbF_kpIhnmvmoXCla/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Bệnh thoái hóa khớp háng</a>
+        </div>
+        <span class="card-category cat-ngoai">Ngoại khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1WAuKBJeqzH61_apFdxuPJI8a1WzhPfhw/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về dinh dưỡng,
+              chăm sóc, vận động</span></a>
+        </div>
+      </div>
+
+      <!-- 34 -->
+      <div class="card" data-cat="ngoai" data-title="bệnh trĩ">
+        <div class="card-top">
+          <div class="card-num">34</div>
+          <a href="https://drive.google.com/file/d/15AoT4_8G_UYwe5KWLMyRsAjHxMJ1wL1_/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Bệnh Trĩ</a>
+        </div>
+        <span class="card-category cat-ngoai">Ngoại khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1dwUkSoNiqdhID6JiLBXXfSwXNsc7X3x4/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về dinh dưỡng,
+              chăm sóc, vận động</span></a>
+        </div>
+      </div>
+
+      <!-- 35 -->
+      <div class="card" data-cat="ngoai" data-title="bệnh viêm ruột thừa">
+        <div class="card-top">
+          <div class="card-num">35</div>
+          <a href="https://drive.google.com/file/d/1ATm8RnG0TQJPinW4Mxx6xqCA89s0RoQi/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Bệnh viêm ruột thừa</a>
+        </div>
+        <span class="card-category cat-ngoai">Ngoại khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1tpI41JXJWo3AZbs7k8s9APsvWaT35X5O/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về dinh dưỡng,
+              chăm sóc, vận động</span></a>
+        </div>
+      </div>
+
+      <!-- 36 -->
+      <div class="card" data-cat="ngoai" data-title="bệnh sau mổ cắt dạ dày">
+        <div class="card-top">
+          <div class="card-num">36</div>
+          <a href="https://drive.google.com/file/d/1Rn0jhz8iXYOeoVuBZl0t_sgLbdoWM6IF/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Bệnh sau mổ cắt dạ dày</a>
+        </div>
+        <span class="card-category cat-ngoai">Ngoại khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1J0p39z-gJ_0GQkQ4vb2KuLHtYhWDdECu/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về dinh dưỡng,
+              chăm sóc, vận động</span></a>
+        </div>
+      </div>
+
+      <!-- 37 -->
+      <div class="card" data-cat="ngoai" data-title="bệnh u đại tràng">
+        <div class="card-top">
+          <div class="card-num">37</div>
+          <a href="https://drive.google.com/file/d/1Ydf4aERZqEo69OvwHZokvMVJGP0PCgDz/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Bệnh U đại tràng</a>
+        </div>
+        <span class="card-category cat-ngoai">Ngoại khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/137GMK32uNf7msAi-lYuAmyx4_xq0Fqtp/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về dinh dưỡng,
+              chăm sóc, vận động</span></a>
+        </div>
+      </div>
+
+      <!-- 38 -->
+      <div class="card" data-cat="ngoai" data-title="bệnh thoát vị bẹn">
+        <div class="card-top">
+          <div class="card-num">38</div>
+          <a href="https://drive.google.com/file/d/1bJcIfA8zV6NjwhE8oiKuPUwQ2mnaf9Xx/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Bệnh thoát vị bẹn</a>
+        </div>
+        <span class="card-category cat-ngoai">Ngoại khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1iC9sm8vbMk1Jx-1a1crl8AmUP9i5L9Xv/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về dinh dưỡng,
+              chăm sóc, vận động</span></a>
+        </div>
+      </div>
+
+      <!-- 39 -->
+      <div class="card" data-cat="than" data-title="những điều cần biết về bệnh u phì đại lành tính tuyến tiền liệt">
+        <div class="card-top">
+          <div class="card-num">39</div>
+          <a href="https://drive.google.com/file/d/1pDcfqBBIkY51eB2SvSyxnze7oWlVnWob/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Những điều cần biết về bệnh U phì đại lành tính tuyến tiền
+            liệt</a>
+        </div>
+        <span class="card-category cat-than">Thận – Tiết niệu</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/17L3525ehtvmGRew_d7XEv4PYaOToZeFG/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về dinh dưỡng,
+              chăm sóc, vận động</span></a>
+        </div>
+      </div>
+
+      <!-- 40 -->
+      <div class="card" data-cat="than" data-title="những điều cần biết về bệnh sỏi niệu quản">
+        <div class="card-top">
+          <div class="card-num">40</div>
+          <a href="https://drive.google.com/file/d/1f4fA0sKAo07DehSBf2nY-oFIub6jaILw/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Những điều cần biết về bệnh Sỏi niệu quản</a>
+        </div>
+        <span class="card-category cat-than">Thận – Tiết niệu</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1MtheiZ5meekn1spuBJijo2x6_7j0Da1g/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về dinh dưỡng,
+              chăm sóc, vận động</span></a>
+        </div>
+      </div>
+
+      <!-- 41 -->
+      <div class="card" data-cat="other" data-title="chăm sóc sản phụ thời kỳ hậu sản">
+        <div class="card-top">
+          <div class="card-num">41</div>
+          <a href="https://drive.google.com/file/d/1E9QtXreY2qPCn_WUUjMbN-N0kK0v7vCC/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Chăm sóc Sản phụ thời kỳ hậu sản</a>
+        </div>
+        <span class="card-category cat-other">Sản khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1YWBudJGCSic06ToTcvUbXluVQPo2LeC7/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về dinh dưỡng,
+              chăm sóc, vận động</span></a>
+        </div>
+      </div>
+
+      <!-- 42 -->
+      <div class="card" data-cat="other" data-title="nuôi con bằng sữa mẹ">
+        <div class="card-top">
+          <div class="card-num">42</div>
+          <a href="https://drive.google.com/file/d/1UrgpavzwXYZbgTXiY92KMk5JlshbdIXt/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Nuôi con bằng sữa mẹ</a>
+        </div>
+        <span class="card-category cat-other">Sản khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1UAVudWFE5YKLbitjjZbDaAG4QzwTAwDv/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn về dinh dưỡng,
+              chăm sóc, vận động</span></a>
+        </div>
+      </div>
+
+      <!-- 43 -->
+      <div class="card" data-cat="other" data-title="viêm amidan cấp">
+        <div class="card-top">
+          <div class="card-num">43</div>
+          <a href="https://drive.google.com/file/d/1ntOS599bzsX9EUKJfkoKWcpLQXrrxPsp/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Viêm Amidan cấp</a>
+        </div>
+        <span class="card-category cat-other">Tai Mũi Họng</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1LUcYBLRJk-EmTqXDGztuYCVCtkepPvGa/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video chăm sóc NB Viêm Amidan
+              cấp</span></a>
+        </div>
+      </div>
+
+      <!-- 44 -->
+      <div class="card" data-cat="other" data-title="viêm amidan mạn tính">
+        <div class="card-top">
+          <div class="card-num">44</div>
+          <a href="https://drive.google.com/file/d/1S8gBDWeHA0dCQ6L2pvGmxwFTSSKoGztw/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Viêm Amidan mạn tính</a>
+        </div>
+        <span class="card-category cat-other">Tai Mũi Họng</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1tr2OsYYDyZ_kdajh235vtqczCNjm_qs3/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video chăm sóc Viêm Amidan mạn
+              tính</span></a>
+        </div>
+      </div>
+
+      <!-- 45 -->
+      <div class="card" data-cat="other" data-title="chăm sóc bệnh viêm xoang mạn tính">
+        <div class="card-top">
+          <div class="card-num">45</div>
+          <a href="https://drive.google.com/file/d/1L5jg4vyhN-YeB0F7FWjEM8CKUbErNayv/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Chăm sóc bệnh viêm xoang mạn tính</a>
+        </div>
+        <span class="card-category cat-other">Tai Mũi Họng</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1kmWFVEqknqUVcieWX9XB2hkKrcwslIaj/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn chăm sóc NB viêm
+              xoang mạn tính</span></a>
+        </div>
+      </div>
+
+      <!-- 46 -->
+      <div class="card" data-cat="other" data-title="bệnh sâu răng">
+        <div class="card-top">
+          <div class="card-num">46</div>
+          <a href="https://drive.google.com/file/d/16jmthH185wK1ZPJ5qUHZLZTzHh9A4i5i/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Bệnh Sâu răng</a>
+        </div>
+        <span class="card-category cat-other">Răng Hàm Mặt</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1SxDALzr7z2rPFYosOeqmnAVl5dRJpXSd/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn chế độ dinh dưỡng
+              NB sâu răng</span></a>
+        </div>
+      </div>
+
+      <!-- 47 -->
+      <div class="card" data-cat="other" data-title="viêm quanh răng">
+        <div class="card-top">
+          <div class="card-num">47</div>
+          <a href="https://drive.google.com/file/d/1-Q_8GWLg_4gqLE-LknDGp215EpS_rXuA/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Viêm quanh răng</a>
+        </div>
+        <span class="card-category cat-other">Răng Hàm Mặt</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1jYpoS8MeXhBq14gPh3TqqhKo6ijFpyCs/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn chăm sóc NB viêm
+              quanh răng</span></a>
+        </div>
+      </div>
+
+      <!-- 48 -->
+      <div class="card" data-cat="noi" data-title="lupus ban đỏ hệ thống">
+        <div class="card-top">
+          <div class="card-num">48</div>
+          <a href="https://drive.google.com/file/d/18GRxpwUfrrRiJZ741Jpce_FImhFrBOyK/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Lupus ban đỏ hệ thống</a>
+        </div>
+        <span class="card-category cat-noi">Nội khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/19uBhosxGxt86TA1Y224JdsFjjD2BhGLo/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn NB Lupus ban đỏ
+              hệ thống</span></a>
+        </div>
+      </div>
+
+      <!-- 49 -->
+      <div class="card" data-cat="noi" data-title="viêm da cơ địa">
+        <div class="card-top">
+          <div class="card-num">49</div>
+          <a href="https://drive.google.com/file/d/19mfiauHe3llGBJg_eaqsPYBVE5Rx3xGC/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Viêm da cơ địa</a>
+        </div>
+        <span class="card-category cat-noi">Da Liễu</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1_owRZf2FR8fa36utFNm08oeInQmCl14-/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn chăm sóc Viêm da
+              cơ địa</span></a>
+        </div>
+      </div>
+
+      <!-- 50 -->
+      <div class="card" data-cat="pt" data-title="phcn thoát vị đĩa đệm cột sống thắt lưng">
+        <div class="card-top">
+          <div class="card-num">50</div>
+          <a href="https://drive.google.com/file/d/1YRwRC6JGdet5_f91OBYBkdaoJCvrxPOI/view" target="_blank"
+            class="card-title" style="text-decoration: none;">PHCN Thoát vị đĩa đệm cột sống thắt lưng</a>
+        </div>
+        <span class="card-category cat-pt">Phục hồi CN</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/13Apa-lvgQ6_bzHjQTH40yYWwaQA3Q0yT/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn PHCN thoát vị đĩa
+              đệm cột sống thắt lưng</span></a>
+        </div>
+      </div>
+
+      <!-- 51 -->
+      <div class="card" data-cat="pt" data-title="phcn sau phẫu thuật thay khớp háng">
+        <div class="card-top">
+          <div class="card-num">51</div>
+          <a href="https://drive.google.com/file/d/1K0InLyxfi0KKaRpUPlnPUHpIZnUvNPHk/view" target="_blank"
+            class="card-title" style="text-decoration: none;">PHCN Sau phẫu thuật thay khớp háng</a>
+        </div>
+        <span class="card-category cat-pt">Phục hồi CN</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1L_S2HZO00zKYAb7R9W1_RGT0U2iZC6jX/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video tư vấn phục hồi sau phẫu
+              thuật Thay khớp háng</span></a>
+        </div>
+      </div>
+
+      <!-- 52 -->
+      <div class="card" data-cat="pt" data-title="đau cổ vai gáy">
+        <div class="card-top">
+          <div class="card-num">52</div>
+          <a href="https://drive.google.com/file/d/160yKw_L5UMo9FvhtRmvMaV_RGEeRUQy2/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Đau cổ vai gáy</a>
+        </div>
+        <span class="card-category cat-pt">Phục hồi CN</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1pwqYcUqr2p3wzHb5ZpwCNsuOGSWYVF-w/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn NB đau cổ vai
+              gáy</span></a>
+        </div>
+      </div>
+
+      <!-- 53 -->
+      <div class="card" data-cat="pt" data-title="đau thần kinh tọa">
+        <div class="card-top">
+          <div class="card-num">53</div>
+          <a href="https://drive.google.com/file/d/1xJjBzeOK0DCZop992L0jefi-OoPBu7SA/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Đau thần kinh tọa</a>
+        </div>
+        <span class="card-category cat-pt">Phục hồi CN</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1jvhB9FzMaSYsFYc3YN7o4G_I4mTkhzU5/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn NB đau thần kinh
+              toạ</span></a>
+        </div>
+      </div>
+
+      <!-- 54 -->
+      <div class="card" data-cat="other" data-title="chăm sóc người bệnh sau phẫu thuật glocom">
+        <div class="card-top">
+          <div class="card-num">54</div>
+          <a href="https://drive.google.com/file/d/1BUXo45ybd--_Sw_2_lrHxg996Hm0k2fV/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Chăm sóc người bệnh sau phẫu thuật Glocom</a>
+        </div>
+        <span class="card-category cat-other">Nhãn khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1KVjmhQqS0iKb2B3ryE4vWWqGLQWrVufP/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video chăm sóc sau phẫu thuật
+              Glocom</span></a>
+        </div>
+      </div>
+
+      <!-- 55 -->
+      <div class="card" data-cat="other" data-title="chăm sóc người bệnh viêm loét giác mạc">
+        <div class="card-top">
+          <div class="card-num">55</div>
+          <a href="https://drive.google.com/file/d/1xKMpJ5ZDPks6IrcTpNsfTFMczUdb5HFi/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Chăm sóc người bệnh viêm loét giác mạc</a>
+        </div>
+        <span class="card-category cat-other">Nhãn khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1Bn1xav-FfMt_SjS0heGIhoddnujq2VOG/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn chăm sóc NB viêm
+              loét giác mạc</span></a>
+        </div>
+      </div>
+
+      <!-- 56 -->
+      <div class="card" data-cat="other" data-title="người bệnh béo phì thừa cân">
+        <div class="card-top">
+          <div class="card-num">56</div>
+          <a href="https://drive.google.com/file/d/1GxZZJSR8AAOvkhPn10za7V_3GKTAR1cr/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Người bệnh béo phì thừa cân</a>
+        </div>
+        <span class="card-category cat-other">Dinh dưỡng</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1FY0p2Ia1sd9RRz_0ZScPHKBD6-11ILp4/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video tư vấn chăm sóc, chế độ
+              dinh dưỡng người bệnh béo phì</span></a>
+        </div>
+      </div>
+
+      <!-- 57 -->
+      <div class="card" data-cat="nhi" data-title="trẻ suy dinh dưỡng">
+        <div class="card-top">
+          <div class="card-num">57</div>
+          <a href="https://drive.google.com/file/d/1cHjJe6LjThlXVRB1GNK_nmNf0EfdvInu/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Trẻ suy dinh dưỡng</a>
+        </div>
+        <span class="card-category cat-nhi">Nhi khoa</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/19TIbgU83KzNFZZw7iD4GIqWvGhSrBA2w/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video tư vấn chăm sóc Trẻ suy
+              dinh dưỡng</span></a>
+        </div>
+      </div>
+
+      <!-- 58 -->
+      <div class="card" data-cat="other" data-title="người bệnh trước và sau phẫu thuật">
+        <div class="card-top">
+          <div class="card-num">58</div>
+          <a href="https://drive.google.com/file/d/1Qdg6nnpMCGuIHZD2NchAEAzEd3-raIrG/view" target="_blank"
+            class="card-title" style="text-decoration: none;">Người bệnh trước và sau phẫu thuật</a>
+        </div>
+        <span class="card-category cat-other">Dinh dưỡng</span>
+        <div class="card-videos">
+          <a href="https://drive.google.com/file/d/1WsTHDgUJipUhDajqde-OPPi04WeN4eHN/view" target="_blank"
+            class="video-link"><span class="play-icon">▶</span><span class="link-text">Video hướng dẫn dinh dưỡng trước
+              và sau phẫu thuật</span></a>
+        </div>
+      </div>
+
+    </div><!-- /grid -->
+  </main>
+
+  <footer>
+    <p>© 2026 Kho Truyền Thông – Giáo Dục Sức Khỏe &nbsp;|&nbsp; Dành cho người bệnh và người nhà</p>
+  </footer>
+
+  <script>
+    let activeFilter = 'all';
+
+    function setFilter(cat, btn) {
+      activeFilter = cat;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterCards();
+    }
+
+    function filterCards() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.card');
+      let visible = 0;
+      cards.forEach(card => {
+        const matchCat = activeFilter === 'all' || card.dataset.cat === activeFilter;
+        const matchQ = !q || card.dataset.title.includes(q) || card.querySelector('.card-title').textContent.toLowerCase().includes(q);
+        if (matchCat && matchQ) {
+          card.classList.remove('hidden'); visible++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+      document.getElementById('countNum').textContent = visible;
+    }
+  </script>
+
+</body>
+
+</html>
